@@ -4,7 +4,7 @@ on:
     push:
         branches: [main, beta]
         tags:
-            - "v*"
+            - "v*" # Trigger for version tags like v1.0.0, v2.0.0, etc.
 
 permissions:
     contents: write
@@ -17,7 +17,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                  fetch-depth: 0
+                  fetch-depth: 0 # Fetch full history to make semantic-release work correctly
 
             - name: Setup Node 24
               uses: actions/setup-node@v4
@@ -45,7 +45,7 @@ jobs:
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v2
               with:
-                  version: latest
+                  version: latest # Use the latest version of Buildx
 
             - name: Cache Docker layers
               uses: actions/cache@v3
@@ -60,21 +60,25 @@ jobs:
               with:
                   registry: ghcr.io
                   username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
+                  password: ${{ secrets.GITHUB_TOKEN }} # Use GitHub's token for authentication
 
             - name: Extract version from tag
               id: version
               run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+              # Extracts the version from the tag
 
             - name: Build Docker image with Buildx
               run: |
+                  REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
                   docker buildx build \
                     --file Dockerfile \
-                    --tag ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }} \
-                    --tag ghcr.io/${{ github.repository }}:latest \
-                    --platform linux/amd64,linux/arm64 .  # Multi-platform build (adjust platforms as needed)
+                    --tag ghcr.io/${REPO_NAME}:${{ steps.version.outputs.VERSION }} \
+                    --tag ghcr.io/${REPO_NAME}:latest \
+                    --platform linux/amd64,linux/arm64 .  # Multi-platform build
 
             - name: Push Docker images
               run: |
-                  docker push ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
-                  docker push ghcr.io/${{ github.repository }}:latest
+                  REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
+                  docker push ghcr.io/${REPO_NAME}:${{ steps.version.outputs.VERSION }}
+                  docker push ghcr.io/${REPO_NAME}:latest
+              # Push both the versioned and latest tags to GitHub Container Registry
