@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import '@/styles/global.scss';
+import css from './RootLayout.module.scss';
+import { SideNav } from "./(ui)/components/SideNav/SideNav";
 
 export const metadata: Metadata = {
   title: "Real estate app",
@@ -13,7 +15,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={css.main}>
+        <main className={css.main}>
+          <SideNav />
+          <div className={css.mainScreen}>
+            {children}
+          </div>
+        </main>
+      </body>
+
     </html>
   );
 }
