@@ -1,0 +1,54 @@
+name: CI Preflight
+
+permissions:
+    contents: read
+    pull-requests: write
+
+on:
+    pull_request:
+        branches: [main, develop]
+
+jobs:
+    preflight:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Node 24
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+
+            - name: Cache node modules
+              uses: actions/cache@v3
+              with:
+                  path: |
+                      ~/.npm
+                      node_modules
+                  key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: TypeScript check
+              run: npx tsc --noEmit
+
+            - name: ESLint check
+              run: npx eslint . --ext .ts,.tsx,.js,.jsx
+
+            - name: Build Next.js (dry run)
+              run: npm run build
+
+            - name: Dry-run semantic-release
+              run: npx semantic-release --dry-run
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Emit summary
+              run: |
+                  echo "## Preflight Summary" >> $GITHUB_STEP_SUMMARY
+                  echo "- Branch: ${{ github.head_ref }}" >> $GITHUB_STEP_SUMMARY
+                  echo "- Status: Typecheck, ESLint, Build, Dry-run passed" >> $GITHUB_STEP_SUMMARY
