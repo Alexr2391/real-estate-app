@@ -21,7 +21,7 @@ WORKDIR $HOME
 # Switch to the non-root user
 USER $USER
 
-# Install development tools like TypeScript, ESLint globally
+# Install development tools like TypeScript, ESLint globally 
 RUN npm install -g typescript eslint
 
 # Set a minimal, non-interactive shell environment
