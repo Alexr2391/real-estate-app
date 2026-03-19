@@ -35,7 +35,7 @@ jobs:
             - name: Dry-run semantic-release
               run: npx semantic-release --dry-run
               env:
-                  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }} # Use the PAT here
+                  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
             - name: Emit summary
               run: |
@@ -62,4 +62,4 @@ jobs:
             - name: Run semantic-release
               run: npx semantic-release
               env:
-                  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }} # Use the PAT here
+                  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
