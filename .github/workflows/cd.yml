@@ -2,9 +2,12 @@ name: CD Release & Docker Build
 
 on:
     push:
-        branches: [main, beta]
-        tags:
-            - "v*" # Trigger for version tags like v1.0.0, v2.0.0, etc.
+        branches: [main, beta] # Triggers on push to these branches, i.e., when something is merged into `main` or `beta`
+    pull_request:
+        branches: [main, beta] # Triggers on PR merge to these branches, i.e., when PRs are merged into `main` or `beta`
+    # You can still have the `tags` trigger if you want to build when tags are pushed
+    # tags:
+    #   - "v*"  # Trigger for version tags like v1.0.0, v2.0.0, etc.
 
 permissions:
     contents: write
