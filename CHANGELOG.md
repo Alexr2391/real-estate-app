@@ -1,3 +1,11 @@
+## [1.0.1-develop.2](https://github.com/Alexr2391/real-estate-app/compare/v1.0.1-develop.1...v1.0.1-develop.2) (2026-03-19)
+
+
+### Bug Fixes
+
+* added personal access token ([643842e](https://github.com/Alexr2391/real-estate-app/commit/643842e88003e5774c156f508f9f1478d50644fe))
+* remove comments ([7f5841d](https://github.com/Alexr2391/real-estate-app/commit/7f5841dc0c8930ae4342e23dfcc2cf8eabfb3ebd))
+
 ## [1.0.1-develop.1](https://github.com/Alexr2391/real-estate-app/compare/v1.0.0...v1.0.1-develop.1) (2026-03-19)
 
 
