@@ -2,12 +2,9 @@ name: CD Release & Docker Build
 
 on:
     push:
-        branches: [main, beta] # Triggers on push to these branches, i.e., when something is merged into `main` or `beta`
-    pull_request:
-        branches: [main, beta] # Triggers on PR merge to these branches, i.e., when PRs are merged into `main` or `beta`
-    # You can still have the `tags` trigger if you want to build when tags are pushed
-    # tags:
-    #   - "v*"  # Trigger for version tags like v1.0.0, v2.0.0, etc.
+        branches: [main, develop] # Triggers only on merge into `main` or `develop`
+        tags:
+            - "v*" # Only triggers on version tags like v1.0.0, v2.0.0, etc.
 
 permissions:
     contents: write
@@ -20,7 +17,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                  fetch-depth: 0 # Fetch full history to make semantic-release work correctly
+                  fetch-depth: 0 # Fetch full history for semantic-release
 
             - name: Setup Node 24
               uses: actions/setup-node@v4
@@ -39,8 +36,8 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     docker:
-        needs: release
         runs-on: ubuntu-latest
+        needs: release # Ensure release job completes before Docker starts
 
         steps:
             - uses: actions/checkout@v4
