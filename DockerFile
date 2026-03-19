@@ -10,7 +10,7 @@ RUN apk update && apk add --no-cache \
     git \
     && rm -rf /var/cache/apk/*  # Clean up to reduce image size
 
-# Create a non-root user and set home directory
+# Create a non-root user and set home directory 
 RUN adduser -D -g '' $USER && \
     mkdir -p $HOME && \
     chown -R $USER:$USER $HOME
@@ -21,7 +21,7 @@ WORKDIR $HOME
 # Switch to the non-root user
 USER $USER
 
-# Install development tools like TypeScript, ESLint globally
+# Install development tools like TypeScript, ESLint globally 
 RUN npm install -g typescript eslint
 
 # Set a minimal, non-interactive shell environment
