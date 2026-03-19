@@ -1,8 +1,10 @@
 name: CI Preflight
 
 permissions:
-    contents: read
+    contents: write
     pull-requests: write
+    issues: write
+    actions: write
 
 on:
     pull_request:
