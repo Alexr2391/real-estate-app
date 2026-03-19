@@ -6,7 +6,9 @@ permissions:
 
 on:
     pull_request:
-        branches: [main, develop]
+        branches: [main, develop] # Trigger on PR to main or develop
+    push:
+        branches: [main, develop] # Trigger on push to main or develop
 
 jobs:
     preflight:
@@ -42,13 +44,37 @@ jobs:
             - name: Build Next.js (dry run)
               run: npm run build
 
-            - name: Dry-run semantic-release
+            - name: Dry-run semantic-release (on PR)
+              if: github.event_name == 'pull_request' # Only run on PR creation
               run: npx semantic-release --dry-run
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Emit summary
+            - name: Emit summary (on PR)
+              if: github.event_name == 'pull_request' # Only run on PR creation
               run: |
                   echo "## Preflight Summary" >> $GITHUB_STEP_SUMMARY
                   echo "- Branch: ${{ github.head_ref }}" >> $GITHUB_STEP_SUMMARY
                   echo "- Status: Typecheck, ESLint, Build, Dry-run passed" >> $GITHUB_STEP_SUMMARY
+
+    release:
+        if: github.event_name == 'push' # Triggered only on push to main or develop
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+              name: Checkout code
+
+            - name: Setup Node 24
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run semantic-release (on push)
+              run: |
+                  npx semantic-release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
