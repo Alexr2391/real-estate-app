@@ -10,7 +10,7 @@ RUN apk update && apk add --no-cache \
     git \
     && rm -rf /var/cache/apk/*  # Clean up to reduce image size
 
-# Create a non-root user and set home directory
+# Create a non-root user and set home directory 
 RUN adduser -D -g '' $USER && \
     mkdir -p $HOME && \
     chown -R $USER:$USER $HOME
