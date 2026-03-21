@@ -1,69 +1,86 @@
-@mixin flexbox($direction: row, $align: null, $justify: null, $gap: null, $wrap: null) {
-    display: flex;
-    flex-direction: $direction;
+@mixin flexbox(
+  $direction: row,
+  $align: null,
+  $justify: null,
+  $gap: null,
+  $wrap: null
+) {
+  display: flex;
+  flex-direction: $direction;
 
-    @if $align !=null {
-        align-items: $align;
-    }
+  @if $align !=null {
+    align-items: $align;
+  }
 
-    @if $justify !=null {
-        justify-content: $justify;
-    }
+  @if $justify !=null {
+    justify-content: $justify;
+  }
 
-    @if $gap !=null {
-        gap: $gap
-    }
+  @if $gap !=null {
+    gap: $gap;
+  }
 
-    @if $wrap !=null {
-        wrap: $wrap;
-    }
+  @if $wrap !=null {
+    wrap: $wrap;
+  }
 }
-
 
 @mixin center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@mixin position ($position: relative, $top: null, $right: null, $bottom: null, $left: null) {
-    position: $position;
+@mixin position(
+  $position: relative,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  position: $position;
 
-    @if $top !=null {
-        top: $top;
-    }
+  @if $top !=null {
+    top: $top;
+  }
 
-    @if $right !=null {
-        right: $right;
-    }
+  @if $right !=null {
+    right: $right;
+  }
 
-    @if $bottom !=null {
-        bottom: $bottom;
-    }
+  @if $bottom !=null {
+    bottom: $bottom;
+  }
 
-    @if $left !=null {
-        left: $left;
-    }
+  @if $left !=null {
+    left: $left;
+  }
 }
 
+@mixin font(
+  $size: 16px,
+  $weight: normal,
+  $style: null,
+  $lineheight: null,
+  $color: null,
+  $textAlign: null
+) {
+  font-size: $size;
+  font-weight: $weight;
 
-@mixin font($size: 16px, $weight: normal, $style: null, $lineheight: null, $color: null, $textAlign: null) {
-    font-size: $size;
-    font-weight: $weight;
+  @if $style !=null {
+    font-style: $style;
+  }
 
-    @if $style !=null {
-        font-style: $style;
-    }
+  @if $lineheight !=null {
+    line-height: $lineheight;
+  }
 
-    @if $lineheight !=null {
-        line-height: $lineheight;
-    }
+  @if $color !=null {
+    color: $color;
+  }
 
-    @if $color !=null {
-        color: $color;
-    }
-
-    @if $textAlign !=null {
-        text-align: $textAlign;
-    }
+  @if $textAlign !=null {
+    text-align: $textAlign;
+  }
 }

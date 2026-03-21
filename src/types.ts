@@ -1,0 +1,19 @@
+export enum Methods {
+  GET = 'GET',
+  PUT = 'PUT',
+  POST = 'POST',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
+}
+
+export interface ApiResponseErrors {
+  details: string;
+  status: number;
+  success: false;
+}
+
+export interface FetchApiReponse<T> {
+  data: T;
+  status: number;
+  success: true;
+}
