@@ -17,3 +17,12 @@ export interface FetchApiReponse<T> {
   status: number;
   success: true;
 }
+
+export enum STATUS {
+  ACTIVE = 'active',
+  DRAFT = 'draft',
+  ARCHIVED = 'archived',
+  PUBLISHED = 'published',
+}
+
+export type StatusValues = `${STATUS}`;

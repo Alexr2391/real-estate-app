@@ -84,3 +84,22 @@
     text-align: $textAlign;
   }
 }
+
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 0 {
+    @error "Line number cannot be 0. Please pass a positive integer.";
+  }
+
+  @if $lines == 1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else if $lines > 1 {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: $lines * 1.2em;
+  }
+}
