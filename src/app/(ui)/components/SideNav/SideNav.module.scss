@@ -1,8 +1,12 @@
 @use '@/styles/index' as *;
 
 .sideNavContainer {
-    grid-area: SideNav;
-    height: 100%;
-    width: 100%;
-    border-right: 1px solid $sideNavBorder;
+  grid-area: SideNav;
+  height: inherit;
+  width: 100%;
+  border-right: 1px solid $sideNavBorder;
+
+  .list {
+    padding: 10px 10px;
+  }
 }
