@@ -44,7 +44,7 @@ export const SideNavListItem: FC<SideNavListItemProps> = ({
             <StatusTag type={status} />
           </div>
 
-          <div>{description}</div>
+          <div className={css.description}>{description}</div>
           <div className={css.address}>{address}</div>
           <div className={css.price}>{price}</div>
         </div>

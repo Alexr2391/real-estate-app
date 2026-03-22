@@ -52,14 +52,21 @@
         @include font($size: 14px, $color: $grey700);
       }
     }
-
+    .description {
+      @include font(
+        $size: 16px,
+        $weight: bold,
+        $color: $textPrimary,
+        $lineheight: 20px
+      );
+    }
     .address {
       @include text-ellipsis(1);
       max-width: 100%;
-      @include font($size: 14px, $color: $grey700);
+      @include font($size: 14px, $color: $textSecondary);
     }
     .price {
-      @include font($size: 14px, $color: $grey700, $weight: 700);
+      @include font($size: 14px, $color: $textSecondary, $weight: 700);
     }
   }
 
