@@ -1,0 +1,27 @@
+@use '@/styles/index' as *;
+
+.header {
+  padding: 20px 0;
+  .wrapper {
+    padding: 10px;
+    .flexContainer {
+      @include flexbox(row, start, space-between);
+      padding-bottom: 20px;
+      border-bottom: 1px solid $grey500;
+      .headerContainer {
+        @include flexbox(column, start, start, 8px);
+        .title {
+          @include font(
+            $size: 24px,
+            $weight: bold,
+            $lineheight: 26px,
+            $color: $textPrimary
+          );
+        }
+        .subtitle {
+          @include font($size: 16px, $lineheight: 18px, $color: $textSecondary);
+        }
+      }
+    }
+  }
+}

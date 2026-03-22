@@ -1,0 +1,29 @@
+@use '@/styles/index' as *;
+
+.container {
+  user-select: none;
+  margin: 10px 0;
+  width: 100%;
+  position: relative;
+  border-radius: 20px;
+  aspect-ratio: 16/9;
+  display: grid;
+  overflow: hidden;
+  grid-template-rows: 1fr 60px;
+  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.1);
+  .imageContainer {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  .thumbContainer {
+    background-color: $universalWhite;
+    padding: 0 10px;
+    position: relative;
+    z-index: 5;
+    @include flexbox(row, center, space-between);
+    .thumbList {
+      @include flexbox(row, center, start, 8px);
+    }
+  }
+}
