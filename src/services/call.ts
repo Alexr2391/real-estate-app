@@ -22,7 +22,6 @@ export const call = async <K extends keyof EndpointMap>(
       ? `${buildUrl(endpoint.path, config.params)}`
       : `${endpoint.path}`;
 
-  // Handle body for non-GET methods
   const body =
     endpoint.method !== 'GET' && 'body' in config && config?.body
       ? JSON.stringify(config.body)
