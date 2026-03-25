@@ -1,6 +1,8 @@
 'use client';
-import { AnimatePresence } from 'motion/react';
-import { useState, type FC } from 'react';
+import { markers } from '@/data/mockMarkers';
+import { AnimatePresence, motion } from 'motion/react';
+import { useRef, useState, type FC } from 'react';
+import { SliderTag } from '../SliderTag/SliderTag';
 import css from './ImageSlider.module.scss';
 import { Controls } from './components/Controls/Controls';
 import { Slide } from './components/Slide';
@@ -12,6 +14,7 @@ export const ImageSlider: FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const onThumbSelection = (thumbIdx: number) => setCurrentIndex(thumbIdx);
+  const constraintRef = useRef<HTMLDivElement>(null);
 
   const controlHandler = (move: 'back' | 'next') => {
     setCurrentIndex((prevIndex) => {
@@ -27,10 +30,11 @@ export const ImageSlider: FC = () => {
 
   return (
     <div className={css.container}>
-      <div
+      <motion.div
+        ref={constraintRef}
         className={css.imageContainer}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onPointerEnter={() => setIsHovered(true)}
+        onPointerLeave={() => setIsHovered(false)}
       >
         <AnimatePresence>
           <Slide
@@ -43,7 +47,14 @@ export const ImageSlider: FC = () => {
             onBack={() => controlHandler('back')}
           />
         </AnimatePresence>
-      </div>
+        {markers.map((datapoint, id) => (
+          <SliderTag
+            key={id}
+            datapoint={datapoint}
+            containerRef={constraintRef}
+          />
+        ))}
+      </motion.div>
       <div className={css.thumbContainer}>
         <div className={css.thumbList}>
           {mockImages.map((thumbUrl, idx) => (
