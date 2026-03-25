@@ -7,4 +7,9 @@
     pointer-events: none;
     -webkit-user-drag: none;
   }
+  .slideContainer {
+    width: inherit;
+    height: inherit;
+    position: relative;
+  }
 }

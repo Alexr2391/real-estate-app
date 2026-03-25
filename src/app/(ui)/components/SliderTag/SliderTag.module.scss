@@ -1,0 +1,12 @@
+@use '@/styles/index' as *;
+
+.container {
+  background-color: $primary500;
+  border-radius: 50%;
+  border: 2px solid $universalWhite;
+  height: 16px;
+  aspect-ratio: 1/1;
+  position: absolute;
+  z-index: 4;
+  cursor: grab;
+}
