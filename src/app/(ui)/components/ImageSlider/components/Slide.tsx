@@ -9,6 +9,7 @@ interface SlideProps {
 
 export const Slide: FC<SlideProps> = ({ imageUrl }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const isLocalPreview = imageUrl.startsWith('blob:') || imageUrl.startsWith('data:');
 
   return (
     <motion.div
@@ -27,6 +28,7 @@ export const Slide: FC<SlideProps> = ({ imageUrl }) => {
           style={{ objectFit: 'cover' }}
           sizes={'100%'}
           loading='eager'
+          unoptimized={isLocalPreview}
         />
       </div>
     </motion.div>
