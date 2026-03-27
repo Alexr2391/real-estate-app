@@ -1,0 +1,60 @@
+@use '@/styles/index' as *;
+
+.chip {
+  @include flexbox(row, center, center, 4px);
+  @include font(13px, 500);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid $grey500;
+  background: $universalWhite;
+  color: $textSecondary;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+
+  &:hover {
+    border-color: $grey700;
+    color: $textPrimary;
+  }
+
+  &.active {
+    border-color: $primary900;
+    color: $textPrimary;
+  }
+
+  &.selected {
+    border-color: $primary900;
+    background: $grey300;
+    color: $textPrimary;
+  }
+}
+
+.paper {
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  min-width: 160px;
+}
+
+.list {
+  padding: 6px;
+  min-width: 120px;
+}
+
+.option {
+  @include font(13px, 400);
+  border-radius: 6px !important;
+  color: $textSecondary;
+
+  &:hover {
+    background: $grey300;
+    color: $textPrimary;
+  }
+
+  &.Mui-selected {
+    background: $grey400 !important;
+    color: $textPrimary;
+    font-weight: 500;
+  }
+}
