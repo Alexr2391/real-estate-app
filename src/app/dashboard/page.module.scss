@@ -1,0 +1,12 @@
+@use '@/styles/index' as *;
+.container {
+  width: 100%;
+  padding: 24px;
+  @include flexbox(row, center, center);
+
+  .headerSection {
+    max-width: 1200px;
+    aspect-ratio: 16/9;
+    width: 100%;
+  }
+}

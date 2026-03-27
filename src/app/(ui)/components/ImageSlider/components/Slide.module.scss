@@ -1,0 +1,15 @@
+.animationDiv {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  .image {
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+  .slideContainer {
+    width: inherit;
+    height: inherit;
+    position: relative;
+  }
+}

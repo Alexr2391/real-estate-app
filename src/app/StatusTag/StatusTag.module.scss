@@ -1,0 +1,25 @@
+@use '@/styles/index' as *;
+
+.container {
+  @include flexbox($align: center, $gap: 8px);
+  .statusDot {
+    border-radius: 50%;
+    height: 6px;
+    aspect-ratio: 1/1;
+    &.active {
+      background-color: $green700;
+    }
+    &.available {
+      background-color: $green500;
+    }
+    &.draft {
+      background-color: $orange500;
+    }
+    &.published {
+      background-color: $primary900;
+    }
+  }
+  .statusText {
+    @include font(12px, $color: $grey700);
+  }
+}

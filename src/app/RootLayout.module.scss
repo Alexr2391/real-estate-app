@@ -1,0 +1,15 @@
+@use '@/styles/index' as *;
+
+.main {
+  background-color: $mainBgColor;
+  display: grid;
+  grid-template-areas: 'SideNav Dashboard';
+  grid-template-columns: minmax(75px, 350px) 1fr;
+  height: 100vh;
+  overflow: hidden;
+
+  .mainScreen {
+    grid-area: Dashboard;
+    height: inherit;
+  }
+}

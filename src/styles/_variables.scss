@@ -1,69 +1,21 @@
-@mixin flexbox($direction: row, $align: null, $justify: null, $gap: null, $wrap: null) {
-    display: flex;
-    flex-direction: $direction;
+$mainBgColor: #f9fafb;
+$sideNavBorder: #e1e7ef;
 
-    @if $align !=null {
-        align-items: $align;
-    }
+$universalWhite: #ffffff;
 
-    @if $justify !=null {
-        justify-content: $justify;
-    }
+$primary500: #2463eb;
+$primary900: #0f1729;
+$primaryhoverLight: #1d212b1a;
 
-    @if $gap !=null {
-        gap: $gap
-    }
+$green500: #21c45d;
+$green700: #1a703a;
 
-    @if $wrap !=null {
-        wrap: $wrap;
-    }
-}
+$grey300: #f3f5f7;
+$grey400: #eaedf0;
+$grey500: #e1e7ef;
+$grey700: #65758b;
 
+$orange500: #f59f0a;
 
-@mixin center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@mixin position ($position: relative, $top: null, $right: null, $bottom: null, $left: null) {
-    position: $position;
-
-    @if $top !=null {
-        top: $top;
-    }
-
-    @if $right !=null {
-        right: $right;
-    }
-
-    @if $bottom !=null {
-        bottom: $bottom;
-    }
-
-    @if $left !=null {
-        left: $left;
-    }
-}
-
-
-@mixin font($size: 16px, $weight: normal, $style: null, $lineheight: null, $color: null, $textAlign: null) {
-    font-size: $size;
-    font-weight: $weight;
-
-    @if $style !=null {
-        font-style: $style;
-    }
-
-    @if $lineheight !=null {
-        line-height: $lineheight;
-    }
-
-    @if $color !=null {
-        color: $color;
-    }
-
-    @if $textAlign !=null {
-        text-align: $textAlign;
-    }
-}
+$textPrimary: #0f1729;
+$textSecondary: #65758b;

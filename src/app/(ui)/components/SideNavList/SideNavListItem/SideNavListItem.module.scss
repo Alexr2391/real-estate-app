@@ -1,0 +1,84 @@
+@use '@/styles/index' as *;
+
+.listItem {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition:
+    border 200ms ease-in-out,
+    background-color 200ms ease-in-out;
+  cursor: pointer;
+
+  .listItemFlex {
+    width: 100%;
+    @include flexbox(row, center, flex-start);
+    padding: 10px 5px;
+    .thumbPlaceholder {
+      min-width: 64px;
+      height: 64px;
+      aspect-ratio: 1/1;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+
+      .expandOverlay {
+        visibility: hidden;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        .expandIcon {
+          @include font($size: 28px, $color: #fff);
+        }
+      }
+    }
+    .listItemInfoContainer {
+      overflow: hidden;
+      flex: 1;
+      @include flexbox(
+        $direction: column,
+        $align: start,
+        $justify: flex-start,
+        $gap: 3px
+      );
+      padding: 0 10px;
+    }
+    .listHeader {
+      width: 100%;
+      @include flexbox(row, center, space-between);
+      .listItemCode {
+        @include font($size: 14px, $color: $grey700);
+      }
+    }
+    .description {
+      @include font(
+        $size: 16px,
+        $weight: bold,
+        $color: $textPrimary,
+        $lineheight: 20px
+      );
+    }
+    .address {
+      @include text-ellipsis(1);
+      max-width: 100%;
+      @include font($size: 14px, $color: $textSecondary);
+    }
+    .price {
+      @include font($size: 14px, $color: $textSecondary, $weight: 700);
+    }
+  }
+
+  &:hover {
+    background-color: $grey500;
+    .listItemFlex {
+      .thumbPlaceholder {
+        .expandOverlay {
+          visibility: visible;
+          @include center();
+        }
+      }
+    }
+  }
+}

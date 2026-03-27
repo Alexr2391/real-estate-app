@@ -1,0 +1,23 @@
+@use '@/styles/index' as *;
+
+.controlsLayer {
+  pointer-events: none;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  @include flexbox(row, center, space-between);
+  top: 0;
+  left: 0;
+  padding: 10px;
+  .controlBtn {
+    pointer-events: all;
+    @include flexbox(row, center, center);
+    background-color: $universalWhite;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1);
+    .icon {
+      @include font($size: 16px, $weight: 700, $color: $textPrimary);
+    }
+  }
+}
