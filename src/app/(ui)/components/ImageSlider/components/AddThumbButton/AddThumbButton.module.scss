@@ -1,0 +1,23 @@
+@use '@/styles/index' as *;
+
+.container {
+  height: 50px;
+  aspect-ratio: 4/3;
+  border: 2px dashed $grey500;
+  border-radius: 15px;
+  flex-shrink: 0;
+  @include center;
+  cursor: pointer;
+  color: $grey700;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    border-color: $primary500;
+    color: $primary500;
+    background-color: rgba(36, 99, 235, 0.05);
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+}

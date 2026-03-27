@@ -1,0 +1,45 @@
+@use '@/styles/index' as *;
+
+.content {
+  @include flexbox(column, stretch, flex-start, 16px);
+  padding-top: 8px !important;
+
+  .hint {
+    color: $textSecondary;
+    text-align: center;
+  }
+  .cropWrapper{
+    height: 500px;
+    position: relative;
+  }
+
+  .frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: $grey300;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    .image {
+      position: absolute;
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  .scaleControl {
+    @include flexbox(row, center, flex-start, 16px);
+    padding: 0 8px;
+
+    .zoomLabel {
+      color: $textSecondary;
+      white-space: nowrap;
+    }
+  }
+}

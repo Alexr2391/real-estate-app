@@ -23,7 +23,7 @@ export const Header: FC = () => {
             </Button>
           </div>
         </div>
-        <ImageSlider />
+        <ImageSlider createMode/>
       </div>
     </div>
   );
