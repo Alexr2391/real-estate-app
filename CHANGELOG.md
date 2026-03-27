@@ -1,3 +1,10 @@
+## [1.1.1-develop.2](https://github.com/Alexr2391/real-estate-app/compare/v1.1.1-develop.1...v1.1.1-develop.2) (2026-03-27)
+
+
+### Bug Fixes
+
+* **real-estate-app:FR14:** add back changelog into repo ([f48bc1a](https://github.com/Alexr2391/real-estate-app/commit/f48bc1a2da29a67364bfa8aeb8a63f0789daabf9))
+
 ## [1.0.1-develop.2](https://github.com/Alexr2391/real-estate-app/compare/v1.0.1-develop.1...v1.0.1-develop.2) (2026-03-19)
 
 
