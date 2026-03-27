@@ -1,0 +1,13 @@
+services:
+    app:
+        image: ghcr.io/alexr2391/real-estate-app:latest
+        ports:
+            - "4000:4000"
+        volumes:
+            - .:/home/dev
+            - node_modules:/home/dev/node_modules
+        tmpfs:
+            - /home/dev/.next
+
+volumes:
+    node_modules:

@@ -11,9 +11,12 @@ import {
   uuid,
 } from 'drizzle-orm/pg-core';
 
-// ─── Enums ────────────────────────────────────────────────────────────────────
-
-export const statusEnum = pgEnum('status', ['active', 'draft', 'archived', 'published']);
+export const statusEnum = pgEnum('status', [
+  'active',
+  'draft',
+  'archived',
+  'published',
+]);
 export const propertyTypeEnum = pgEnum('property_type', [
   'apartment',
   'house',
@@ -24,11 +27,10 @@ export const propertyTypeEnum = pgEnum('property_type', [
 ]);
 export const currencyEnum = pgEnum('currency', ['EUR', 'USD', 'GBP']);
 
-
 const timestamps = {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
-  deletedAt: timestamp('deleted_at'), 
+  deletedAt: timestamp('deleted_at'),
 };
 
 export const usersTable = pgTable('users', {
@@ -53,11 +55,9 @@ export const offersTable = pgTable('offers', {
   createdBy: integer('created_by')
     .notNull()
     .references(() => usersTable.id),
-  updatedBy: integer('updated_by')
-    .references(() => usersTable.id), 
+  updatedBy: integer('updated_by').references(() => usersTable.id),
   ...timestamps,
 });
-
 
 export const offerDetailsTable = pgTable('offer_details', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -76,7 +76,6 @@ export const offerDetailsTable = pgTable('offer_details', {
   features: jsonb('features').$type<string[]>().default([]),
   ...timestamps,
 });
-
 
 export const addressesTable = pgTable('addresses', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -105,7 +104,6 @@ export const offerImagesTable = pgTable('offer_images', {
   altText: text('alt_text'),
   ...timestamps,
 });
-
 
 export const sliderMarkersTable = pgTable('slider_markers', {
   id: uuid('id').defaultRandom().primaryKey(),

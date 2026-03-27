@@ -1,0 +1,9 @@
+@use '@/styles/index' as *;
+
+.flexbox {
+  @include flexbox(row, center, center, 8px);
+
+  .addButton {
+    flex: 1;
+  }
+}

@@ -1,0 +1,12 @@
+@use '@/styles/index' as *;
+
+.container {
+  @include flexbox(row, center, flex-start, 8px);
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
