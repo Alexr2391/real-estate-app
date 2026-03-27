@@ -1,32 +1,34 @@
-# Use a base Node.js 24 Alpine image
-FROM node:24-alpine
+# Stage 1: Install dependencies
+FROM node:24-alpine AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 
-# Set environment variables
-ENV HOME=/home/dev
-ENV USER=dev
+# Stage 2: Build the app
+FROM node:24-alpine AS builder
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
 
-# Install minimal essential packages
-RUN apk update && apk add --no-cache \
-    git \
-    && rm -rf /var/cache/apk/*  # Clean up to reduce image size
+# Stage 3: Production runner
+FROM node:24-alpine AS runner
+WORKDIR /app
 
-# Create a non-root user and set home directory 
-RUN adduser -D -g '' $USER && \
-    mkdir -p $HOME && \
-    chown -R $USER:$USER $HOME
+ENV NODE_ENV=production
 
-# Set the working directory to the home of the 'dev' user
-WORKDIR $HOME
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-# Switch to the non-root user
-USER $USER
+# Copy only what's needed to run the standalone build
+COPY --from=builder --chown=appuser:appgroup /app/.next/standalone ./
+COPY --from=builder --chown=appuser:appgroup /app/.next/static ./.next/static
+COPY --from=builder --chown=appuser:appgroup /app/public ./public
 
-# Configure npm to use a user-local prefix so global installs don't require root
-RUN mkdir -p $HOME/.npm-global && npm config set prefix "$HOME/.npm-global"
+USER appuser
 
-# Install development tools like TypeScript, ESLint globally
-RUN npm install -g typescript eslint
+EXPOSE 4000
+ENV PORT=4000
+ENV HOSTNAME=0.0.0.0
 
-# Set a minimal, non-interactive shell environment
-RUN echo "export PS1='[\u@\h \W]\$ '" >> $HOME/.ashrc \
-    && echo "export PATH=$HOME/.npm-global/bin:$PATH" >> $HOME/.ashrc
+CMD ["node", "server.js"]
