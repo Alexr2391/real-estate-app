@@ -1,3 +1,10 @@
+# [1.2.0-develop.1](https://github.com/Alexr2391/real-estate-app/compare/v1.1.1-develop.2...v1.2.0-develop.1) (2026-03-27)
+
+
+### Features
+
+* **real-estate-app:FE15:** adding filters and, sidebar actions ([2da5eb6](https://github.com/Alexr2391/real-estate-app/commit/2da5eb653c74925bd5e74144385df7c248bc21ce))
+
 ## [1.1.1-develop.2](https://github.com/Alexr2391/real-estate-app/compare/v1.1.1-develop.1...v1.1.1-develop.2) (2026-03-27)
 
 
