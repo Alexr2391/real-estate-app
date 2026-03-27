@@ -21,7 +21,10 @@ WORKDIR $HOME
 # Switch to the non-root user
 USER $USER
 
-# Install development tools like TypeScript, ESLint globally 
+# Configure npm to use a user-local prefix so global installs don't require root
+RUN mkdir -p $HOME/.npm-global && npm config set prefix "$HOME/.npm-global"
+
+# Install development tools like TypeScript, ESLint globally
 RUN npm install -g typescript eslint
 
 # Set a minimal, non-interactive shell environment
