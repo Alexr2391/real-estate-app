@@ -2,7 +2,7 @@
 import { markers } from '@/data/mockMarkers';
 import { autoFitToCanvas, loadImage, needsCenteringModal } from '@/utils/imageCanvas';
 import { AnimatePresence, motion } from 'motion/react';
-import { useRef, useState, type FC } from 'react';
+import { useRef, useState } from 'react';
 import { FileInput } from '../common/FileInput/FileInput';
 import { ImageCenterModal } from '../common/ImageCenterModal/ImageCenterModal';
 import { UploadZone } from '../common/UploadZone/UploadZone';
@@ -18,12 +18,14 @@ const mockImages = ['/penthouse.jpg', '/bedroom.jpg', '/bathroom.jpg'];
 interface ImageSliderProps {
   createMode?: boolean;
   initialImages?: string[];
+  onImagesChange?: (images: string[], blobs: Map<string, Blob>) => void;
 }
 
-export const ImageSlider: FC<ImageSliderProps> = ({
+export const ImageSlider = ({
   createMode = false,
   initialImages,
-}) => {
+  onImagesChange,
+}: ImageSliderProps) => {
   const [images, setImages] = useState<string[]>(
     initialImages ?? (createMode ? [] : mockImages)
   );
@@ -32,6 +34,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
   const [pendingImage, setPendingImage] = useState<HTMLImageElement | null>(null);
   const constraintRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const blobsRef = useRef<Map<string, Blob>>(new Map());
 
   const onThumbSelection = (idx: number) => setCurrentIndex(idx);
 
@@ -45,15 +48,17 @@ export const ImageSlider: FC<ImageSliderProps> = ({
 
   const pushImage = (blob: Blob) => {
     const previewUrl = URL.createObjectURL(blob);
+    blobsRef.current.set(previewUrl, blob);
     setImages((prev) => {
+      const next = [...prev, previewUrl];
       setCurrentIndex(prev.length);
-      return [...prev, previewUrl];
+      onImagesChange?.(next, blobsRef.current);
+      return next;
     });
   };
 
   const handleFileSelected = async (file: File) => {
     const img = await loadImage(file);
-
     if (needsCenteringModal(img)) {
       setPendingImage(img);
     } else {

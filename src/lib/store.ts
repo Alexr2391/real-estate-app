@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { offersApi } from './api/offersApi';
 import sideNavReducer from './slices/sidenavSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       sideNav: sideNavReducer,
+      [offersApi.reducerPath]: offersApi.reducer,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(offersApi.middleware),
   });
 };
 

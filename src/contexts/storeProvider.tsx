@@ -1,7 +1,8 @@
 'use client';
 import { makeStore } from '@/lib/store';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import type { ReactNode } from 'react';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Provider } from 'react-redux';
 
 interface Props {
@@ -9,7 +10,12 @@ interface Props {
 }
 
 export const StoreProvider = ({ children }: Props) => {
-  const [store] = useState(makeStore());
+  const storeRef = useRef(makeStore());
 
-  return <Provider store={store}>{children}</Provider>;
+  useEffect(() => {
+    const unsubscribe = setupListeners(storeRef.current.dispatch);
+    return unsubscribe;
+  }, []);
+
+  return <Provider store={storeRef.current}>{children}</Provider>;
 };

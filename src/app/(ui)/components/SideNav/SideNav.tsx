@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { SideNavList } from '../SideNavList/SideNavList';
 import css from './SideNav.module.scss';
