@@ -1,7 +1,7 @@
 import {
   PRICE_RANGE_OPTIONS,
   TYPE_OFFER_OPTIONS,
-} from '../SideNavActions/constants';
+} from '../SIdeNavActions/constants';
 import { FilterSelect } from './components/FilterSelect/FilterSelect';
 import { PriceRangeFilter } from './components/PriceRangeFilter/PriceRangeFilter';
 import css from './SideNavFilters.module.scss';
