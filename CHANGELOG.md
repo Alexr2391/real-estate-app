@@ -1,3 +1,15 @@
+# [1.2.0-develop.3](https://github.com/Alexr2391/real-estate-app/compare/v1.2.0-develop.2...v1.2.0-develop.3) (2026-04-09)
+
+
+### Bug Fixes
+
+* converted store from ref to state in storeprovider ([c18328e](https://github.com/Alexr2391/real-estate-app/commit/c18328e4a75a60ddf85b1b323f5b1ba62cc078b6))
+
+
+### Features
+
+* **real-estate-app:FE17:** connect supabase, add draft feature, ISR display of offers ([5ca1541](https://github.com/Alexr2391/real-estate-app/commit/5ca15410d06d7517fe503139117b0c7624a26a11))
+
 # [1.2.0-develop.2](https://github.com/Alexr2391/real-estate-app/compare/v1.2.0-develop.1...v1.2.0-develop.2) (2026-04-09)
 
 
