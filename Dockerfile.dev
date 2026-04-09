@@ -1,0 +1,30 @@
+FROM node:24-alpine
+
+ENV HOME=/home/dev
+ENV USER=dev
+ENV NODE_ENV=development
+
+RUN apk update && apk add --no-cache git && rm -rf /var/cache/apk/*
+
+RUN adduser -D -g '' $USER && \
+    mkdir -p $HOME && \
+    chown -R $USER:$USER $HOME
+
+WORKDIR $HOME
+
+USER $USER
+
+# Configure npm user-local global prefix
+RUN mkdir -p $HOME/.npm-global && npm config set prefix "$HOME/.npm-global"
+ENV PATH=$HOME/.npm-global/bin:$PATH
+
+# Install dev tools globally
+RUN npm install -g typescript eslint
+
+COPY --chown=$USER:$USER package.json package-lock.json ./
+RUN npm ci
+
+# Source is mounted as a volume at runtime for hot reloading
+EXPOSE 4000
+
+CMD ["npm", "run", "dev"]

@@ -1,10 +1,10 @@
 'use client';
-import { StatusTag } from '@/app/StatusTag/StatusTag';
+import { StatusTag } from '@/app/(ui)/components/common/StatusTag/StatusTag';
 import { useAppDispatch } from '@/lib/hooks';
 import { setSelection } from '@/lib/slices/sidenavSlice';
 import { ListItem } from '@mui/material';
 import Image from 'next/image';
-import { type FC } from 'react';
+import { useState, type FC } from 'react';
 import { BiExpand } from 'react-icons/bi';
 import type { SideNavListItemProps } from '../types';
 import css from './SideNavListItem.module.scss';
@@ -18,6 +18,7 @@ export const SideNavListItem: FC<SideNavListItemProps> = ({
   address,
 }) => {
   const dispatch = useAppDispatch();
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
     <ListItem
@@ -29,14 +30,19 @@ export const SideNavListItem: FC<SideNavListItemProps> = ({
           <div className={css.expandOverlay}>
             <BiExpand className={css.expandIcon} />
           </div>
-          <Image
-            src={imageUrl}
-            alt='Description of image'
-            fill={true}
-            style={{ objectFit: 'cover' }}
-            loading='eager'
-            sizes={'100%'}
-          />
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt='Description of image'
+              fill={true}
+              style={{ objectFit: 'cover', opacity: imgLoaded ? 1 : 0, transition: 'opacity 300ms ease-in-out' }}
+              loading='eager'
+              sizes={'100%'}
+              onLoad={() => setImgLoaded(true)}
+            />
+          ) : (
+            <div className={css.imagePlaceholder} />
+          )}
         </div>
         <div className={css.listItemInfoContainer}>
           <div className={css.listHeader}>

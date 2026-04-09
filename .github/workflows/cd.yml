@@ -42,11 +42,20 @@ jobs:
               id: repo
               run: echo "name=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
+            - name: Select Dockerfile
+              id: dockerfile
+              run: |
+                  if [ "${{ github.event.release.prerelease }}" = "true" ]; then
+                    echo "file=Dockerfile.dev" >> $GITHUB_OUTPUT
+                  else
+                    echo "file=Dockerfile" >> $GITHUB_OUTPUT
+                  fi
+
             - name: Build and push
               uses: docker/build-push-action@v6
               with:
                   context: .
-                  file: Dockerfile
+                  file: ${{ steps.dockerfile.outputs.file }}
                   platforms: linux/amd64,linux/arm64
                   push: true
                   tags: |

@@ -1,0 +1,104 @@
+@use '@/styles/index' as *;
+
+.chip {
+  @include flexbox(row, center, center, 4px);
+  @include font(13px, 500);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid $grey500;
+  background: $universalWhite;
+  color: $textSecondary;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+
+  &:hover {
+    border-color: $grey700;
+    color: $textPrimary;
+  }
+
+  &.active {
+    border-color: $primary900;
+    color: $textPrimary;
+  }
+
+  &.selected {
+    border-color: $primary900;
+    background: $grey300;
+    color: $textPrimary;
+  }
+}
+
+.paper {
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.columns {
+  @include flexbox(row, flex-start, flex-start, 0);
+  padding: 16px;
+  max-width: 380px;
+}
+
+.divider {
+  width: 1px;
+  background: $grey500;
+  margin: 0 12px;
+  align-self: stretch;
+}
+
+.column {
+  width: 100%;
+  @include flexbox(column, flex-start, flex-start, 10px);
+  min-width: 128px;
+}
+
+.label {
+  @include font(12px, 500);
+  color: $textSecondary;
+}
+
+.input {
+  @include font(13px, 400);
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid $grey500;
+  border-radius: 8px;
+  color: $textPrimary;
+  outline: none;
+  transition: border-color 0.15s;
+
+  &::placeholder {
+    color: $grey700;
+  }
+
+  &:focus {
+    border-color: $primary900;
+  }
+}
+
+.options {
+  @include flexbox(column, flex-start, flex-start, 2px);
+  width: 100%;
+  max-height: 310px;
+  overflow: auto;
+}
+
+.option {
+  @include font(13px, 400);
+  border-radius: 6px !important;
+  color: $textSecondary;
+
+  &:hover {
+    background: $grey300;
+    color: $textPrimary;
+  }
+
+  &.Mui-selected {
+    background: $grey400 !important;
+    color: $textPrimary;
+    font-weight: 500;
+  }
+}

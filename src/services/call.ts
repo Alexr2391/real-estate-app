@@ -5,8 +5,12 @@ import {
   CallConfig,
   EndpointMap,
   isOptionalConfig,
+  RawBodyOption,
   ResponseFor,
 } from './types';
+
+const isRawBody = (cfg: unknown): cfg is RawBodyOption =>
+  typeof cfg === 'object' && cfg !== null && 'rawBody' in cfg;
 
 export const call = async <K extends keyof EndpointMap>(
   key: K,
@@ -22,15 +26,24 @@ export const call = async <K extends keyof EndpointMap>(
       ? `${buildUrl(endpoint.path, config.params)}`
       : `${endpoint.path}`;
 
-  const body =
-    endpoint.method !== 'GET' && 'body' in config && config?.body
-      ? JSON.stringify(config.body)
-      : undefined;
+  const raw = isRawBody(config);
+
+  const body = endpoint.method !== 'GET'
+    ? raw
+      ? config.rawBody
+      : 'body' in config && config.body
+        ? JSON.stringify(config.body)
+        : undefined
+    : undefined;
 
   const headers = new Headers({
     ...config.headers,
     ...(endpoint.method !== 'GET'
-      ? { 'Content-Type': 'application/json' }
+      ? raw
+        ? config.contentType
+          ? { 'Content-Type': config.contentType }
+          : {}
+        : { 'Content-Type': 'application/json' }
       : {}),
   });
 
