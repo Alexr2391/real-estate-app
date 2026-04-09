@@ -1,3 +1,15 @@
+# [1.2.0-develop.2](https://github.com/Alexr2391/real-estate-app/compare/v1.2.0-develop.1...v1.2.0-develop.2) (2026-04-09)
+
+
+### Bug Fixes
+
+* ts typo ([5b95dfb](https://github.com/Alexr2391/real-estate-app/commit/5b95dfb2ec0408204aed6397359a725cfee221c6))
+
+
+### Features
+
+* **real-estate-app:FE16:** moved files added dependabot for package updates ([1e2630d](https://github.com/Alexr2391/real-estate-app/commit/1e2630d97caf6b3cf7a400a338bc7121f235da27))
+
 # [1.2.0-develop.1](https://github.com/Alexr2391/real-estate-app/compare/v1.1.1-develop.2...v1.2.0-develop.1) (2026-03-27)
 
 
