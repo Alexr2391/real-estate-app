@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/Alexr2391/real-estate-app/compare/v1.1.0...v1.2.0) (2026-04-09)
+
+
+### Bug Fixes
+
+* converted store from ref to state in storeprovider ([c18328e](https://github.com/Alexr2391/real-estate-app/commit/c18328e4a75a60ddf85b1b323f5b1ba62cc078b6))
+* fix dockerfiles, for dev and prod, bump version ([38c8fbc](https://github.com/Alexr2391/real-estate-app/commit/38c8fbc6adb94ef0b4a617db74d19f74b878b682))
+* **real-estate-app:FR14:** add back changelog into repo ([f48bc1a](https://github.com/Alexr2391/real-estate-app/commit/f48bc1a2da29a67364bfa8aeb8a63f0789daabf9))
+* ts typo ([5b95dfb](https://github.com/Alexr2391/real-estate-app/commit/5b95dfb2ec0408204aed6397359a725cfee221c6))
+
+
+### Features
+
+* **real-estate-app:FE15:** adding filters and, sidebar actions ([2da5eb6](https://github.com/Alexr2391/real-estate-app/commit/2da5eb653c74925bd5e74144385df7c248bc21ce))
+* **real-estate-app:FE16:** moved files added dependabot for package updates ([1e2630d](https://github.com/Alexr2391/real-estate-app/commit/1e2630d97caf6b3cf7a400a338bc7121f235da27))
+* **real-estate-app:FE17:** connect supabase, add draft feature, ISR display of offers ([5ca1541](https://github.com/Alexr2391/real-estate-app/commit/5ca15410d06d7517fe503139117b0c7624a26a11))
+
 # [1.2.0-develop.3](https://github.com/Alexr2391/real-estate-app/compare/v1.2.0-develop.2...v1.2.0-develop.3) (2026-04-09)
 
 
