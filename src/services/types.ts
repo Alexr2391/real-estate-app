@@ -70,6 +70,30 @@ export type isOptionalConfig<K extends keyof EndpointMap> =
 
 export type ServiceProviderOptions = keyof typeof servicesConfig;
 
+/**
+ * Bypasses JSON serialisation and the default Content-Type: application/json.
+ * Use when the endpoint expects a non-JSON body (e.g. url-encoded, multipart).
+ * Provide `contentType` to set a specific Content-Type header, or omit it to
+ * let the runtime set it automatically (e.g. for FormData with boundary).
+ */
+export type RawBodyOption = {
+  rawBody: BodyInit;
+  contentType?: string;
+};
+
+type BaseNonGetConfig<K extends keyof EndpointMap> = HeadersOption<K> &
+  CacheOptions & { serviceProvider?: ServiceProviderOptions };
+
+type JsonBodyConfig<K extends keyof EndpointMap> = BaseNonGetConfig<K> & {
+  params?: ParamsPerEndPoint[K];
+  body: EndpointMap[K] extends { body: infer B } ? B : never;
+};
+
+type RawBodyConfig<K extends keyof EndpointMap> = BaseNonGetConfig<K> &
+  RawBodyOption & {
+    params?: ParamsPerEndPoint[K];
+  };
+
 export type CallConfig<K extends keyof EndpointMap> = EndpointMap[K] extends {
   method: 'GET';
 }
@@ -81,17 +105,10 @@ export type CallConfig<K extends keyof EndpointMap> = EndpointMap[K] extends {
       } & HeadersOption<K> &
         CacheOptions & { serviceProvider?: ServiceProviderOptions }
   : 'body' extends keyof EndpointMap[K]
-    ? {
-        params?: ParamsPerEndPoint[K];
-        body: EndpointMap[K]['body'];
-        serviceProvider?: ServiceProviderOptions;
-      } & HeadersOption<K> &
-        CacheOptions
+    ? JsonBodyConfig<K> | RawBodyConfig<K>
     : keyof ParamsPerEndPoint[K] extends never
-      ? HeadersOption<K> &
-          CacheOptions & { serviceProvider?: ServiceProviderOptions }
-      : { params?: ParamsPerEndPoint[K] } & HeadersOption<K> &
-          CacheOptions & { serviceProvider?: ServiceProviderOptions };
+      ? BaseNonGetConfig<K> | RawBodyConfig<K>
+      : ({ params?: ParamsPerEndPoint[K] } & BaseNonGetConfig<K>) | RawBodyConfig<K>;
 
 export interface CacheOptions {
   next?: RequestInit['next'];

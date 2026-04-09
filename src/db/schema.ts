@@ -53,7 +53,6 @@ export const offersTable = pgTable('offers', {
   currency: currencyEnum('currency').notNull().default('EUR'),
   status: statusEnum('status').notNull().default('draft'),
   createdBy: integer('created_by')
-    .notNull()
     .references(() => usersTable.id),
   updatedBy: integer('updated_by').references(() => usersTable.id),
   ...timestamps,
@@ -99,6 +98,7 @@ export const offerImagesTable = pgTable('offer_images', {
     .notNull()
     .references(() => offersTable.id, { onDelete: 'cascade' }),
   url: text('url').notNull(),
+  thumbUrl: text('thumb_url'),
   isMain: boolean('is_main').notNull().default(false),
   sortOrder: integer('sort_order').notNull().default(0),
   altText: text('alt_text'),

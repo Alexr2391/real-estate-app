@@ -1,7 +1,7 @@
 export const EXPORT_W = 1280;
 export const EXPORT_H = 720;
 
-const RATIO_TOLERANCE = 0.05; // 5% auto-fit without modal
+const RATIO_TOLERANCE = 0.05;
 
 export const loadImage = (file: File): Promise<HTMLImageElement> => {
   return new Promise((resolve, reject) => {
@@ -10,14 +10,13 @@ export const loadImage = (file: File): Promise<HTMLImageElement> => {
     img.onerror = reject;
     img.src = URL.createObjectURL(file);
   });
-}
-
+};
 
 export const needsCenteringModal = (img: HTMLImageElement): boolean => {
   const imgRatio = img.naturalWidth / img.naturalHeight;
-  const targetRatio = EXPORT_W / EXPORT_H; 
+  const targetRatio = EXPORT_W / EXPORT_H;
   return Math.abs(imgRatio - targetRatio) / targetRatio > RATIO_TOLERANCE;
-}
+};
 
 export const autoFitToCanvas = (img: HTMLImageElement): Promise<Blob> => {
   const canvas = document.createElement('canvas');
@@ -47,4 +46,4 @@ export const autoFitToCanvas = (img: HTMLImageElement): Promise<Blob> => {
       0.85
     );
   });
-}
+};

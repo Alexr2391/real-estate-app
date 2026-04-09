@@ -34,8 +34,9 @@ export const fetchApi = async <TResponse = null>({
       }
 
       const { apiKey: providerApiKey, apiEndpoint } = service;
+      if (!apiEndpoint) throw new Error(`Missing API endpoint for provider: ${serviceProvider}`);
       headers.set('Authorization', `Bearer ${providerApiKey || apiKey}`);
-      finalUrl = `${apiEndpoint}/${endpointPath}`;
+      finalUrl = `${apiEndpoint.replace(/\/$/, '')}/${endpointPath}`;
     }
 
     //TODO:  Placeholder for server-side logic
@@ -84,7 +85,7 @@ export const fetchApi = async <TResponse = null>({
 
     return {
       success: false,
-      details: `Failed to fetch ${endpointPath}: ${data}`,
+      details: `Failed to fetch ${endpointPath}: ${typeof data === 'string' ? data : JSON.stringify(data)}`,
       status: response.status,
     };
   } catch (err: unknown) {
