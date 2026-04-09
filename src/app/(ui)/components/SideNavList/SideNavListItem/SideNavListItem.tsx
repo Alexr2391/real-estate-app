@@ -1,5 +1,5 @@
 'use client';
-import { StatusTag } from '@/app/StatusTag/StatusTag';
+import { StatusTag } from '@/app/(ui)/components/common/StatusTag/StatusTag';
 import { useAppDispatch } from '@/lib/hooks';
 import { setSelection } from '@/lib/slices/sidenavSlice';
 import { ListItem } from '@mui/material';
