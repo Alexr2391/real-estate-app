@@ -2,7 +2,7 @@
 import { makeStore } from '@/lib/store';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import type { ReactNode } from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 
 interface Props {
@@ -10,12 +10,13 @@ interface Props {
 }
 
 export const StoreProvider = ({ children }: Props) => {
-  const storeRef = useRef(makeStore());
+  const [store] = useState(makeStore());
 
   useEffect(() => {
-    const unsubscribe = setupListeners(storeRef.current.dispatch);
+    const unsubscribe = setupListeners(store.dispatch);
     return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <Provider store={storeRef.current}>{children}</Provider>;
+  return <Provider store={store}>{children}</Provider>;
 };
