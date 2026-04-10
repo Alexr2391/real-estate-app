@@ -32,12 +32,18 @@ export const Header = () => {
       let binary = '';
       for (const byte of bytes) binary += String.fromCharCode(byte);
 
-      const uploadResult = await call('uploadOfferImage', { body: { image: btoa(binary) } });
+      const uploadResult = await call('uploadOfferImage', {
+        body: { image: btoa(binary) },
+      });
       if (!uploadResult.success) throw new Error(uploadResult.details);
-      finalImages.push({ url: uploadResult.data.url, thumbUrl: uploadResult.data.thumbUrl });
+      finalImages.push({
+        url: uploadResult.data.url,
+        thumbUrl: uploadResult.data.thumbUrl,
+      });
     }
 
-    await createDraftOffer({ images: finalImages });
+    const result = await createDraftOffer({ images: finalImages });
+    if ('error' in result) console.error('error post offer:', result.error);
   };
 
   return (
