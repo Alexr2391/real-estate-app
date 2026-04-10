@@ -1,4 +1,5 @@
-export const BASE_URL_NEXT = 'http://localhost:4000' as const;
+export const BASE_URL_NEXT =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:4000';
 
 export const servicesConfig = {
   imbb: {
