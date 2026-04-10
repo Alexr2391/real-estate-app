@@ -1,3 +1,10 @@
+## [1.2.1-develop.1](https://github.com/Alexr2391/real-estate-app/compare/v1.2.0...v1.2.1-develop.1) (2026-04-10)
+
+
+### Bug Fixes
+
+* change call path in prod ([5350bb1](https://github.com/Alexr2391/real-estate-app/commit/5350bb175617b8db844edd525f17dba77f19d39f))
+
 # [1.2.0](https://github.com/Alexr2391/real-estate-app/compare/v1.1.0...v1.2.0) (2026-04-09)
 
 
