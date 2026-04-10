@@ -15,6 +15,7 @@ export async function GET() {
     const offers = await getOffersList();
     return NextAPIResponseTransformer(offers);
   } catch (err) {
+    console.error('[GET /api/offers]', err);
     return NextAPIErrorTransformer(err);
   }
 }
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest) {
 
     return NextAPIResponseTransformer({ id: offer.id }, 201);
   } catch (err) {
+    console.error('[POST /api/offers]', err);
     return NextAPIErrorTransformer(err);
   }
 }
