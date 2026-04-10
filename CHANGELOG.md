@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Alexr2391/real-estate-app/compare/v1.2.1...v1.2.2) (2026-04-10)
+
+
+### Bug Fixes
+
+* add logs for prod db errors ([51cf5c3](https://github.com/Alexr2391/real-estate-app/commit/51cf5c3b8a0adf39b3552e84843997d86a54f8a4))
+
 ## [1.2.2-develop.1](https://github.com/Alexr2391/real-estate-app/compare/v1.2.1...v1.2.2-develop.1) (2026-04-10)
 
 
